@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :passport_number, presence: true, uniqueness:true, length: 8
   validates :phone_number, presence: true,
   validates :date_of_birth, presence:true,
-
+  has_many :petitions
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  before_save { self.email = email.downcase }
 end
