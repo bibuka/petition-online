@@ -10,6 +10,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/navigation' %>
+
+    <div class="container">
+      <ol class="breadcrumb">
+        <li><%= current_uri = request.env['PATH_INFO'] %></li>
+      </ol>
+      <%= render 'shared/messages' %>
+          <%= yield %>
+    </div>
+
+
+
+
   </body>
 </html>

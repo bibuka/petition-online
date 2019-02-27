@@ -10,12 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_25_221209) do
+ActiveRecord::Schema.define(version: 2019_02_27_193736) do
 
   create_table "petitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.datetime "updated_at"
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "first_name"
+    t.string "second_name"
+    t.string "city"
+    t.string "passport_number"
+    t.integer "phone_number"
+    t.date "date_of_birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

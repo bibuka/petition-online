@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-    def index 
-        
-    end 
+    def index
+        @petitions=Petition.all
+    end
 end
