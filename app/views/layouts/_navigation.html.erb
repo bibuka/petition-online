@@ -1,32 +1,32 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'Petition-online', root_path, :class=>"navbar-brand"%>
-    </div>
+<nav class="navbar shadow-sm fixed-top navbar-light navbar-expand-lg" style="background-color: #e3f2fd;" role="navigation">
+  <%= link_to 'Petition-online', root_path, :class=>"navbar-brand"%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'List', petitions_path%></li>
-        <li><%= link_to 'New petition', new_petition_path%></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>User</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Sing in <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a></li>
-            <li><a href="#">Sign out <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav d-flex w-100">
+      <li class="nav-item active ">
+        <%= link_to 'List', petitions_path, :class=>'nav-link '%>
+      </li>
+      <li class="nav-item mr-auto">
+        <% if logged_in? %>
+        <%= link_to 'New petition', new_petition_path, :class=>'nav-link '%>
+        <% else %>
+        <%= link_to 'New petition', new_petition_path, :class=>'nav-link disabled'%>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <% if !logged_in? %>
+        <%= link_to 'Log in', login_path, :class=>'nav-link ' %>
+        <% else %>
+        <%= link_to 'Log out', logout_path, method: :delete , :class=>'nav-link '%>
+        <% end %>
+      </li>
+
+      <li class="nav-item">
+      <%= link_to 'Sign up', signup_path, :class=>'nav-link ' %>
+      </li>
+    </ul>
+  </div>
 </nav>

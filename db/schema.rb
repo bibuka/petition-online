@@ -10,13 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_200206) do
+ActiveRecord::Schema.define(version: 2019_03_05_162810) do
 
   create_table "petitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.datetime "updated_at"
     t.integer "user_id"
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
+    t.integer "cached_scoped_subscribe_votes_total", default: 0
+    t.integer "cached_scoped_subscribe_votes_score", default: 0
+    t.integer "cached_scoped_subscribe_votes_up", default: 0
+    t.integer "cached_scoped_subscribe_votes_down", default: 0
+    t.integer "cached_weighted_subscribe_score", default: 0
+    t.integer "cached_weighted_subscribe_total", default: 0
+    t.float "cached_weighted_subscribe_average", default: 0.0
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -30,6 +44,21 @@ ActiveRecord::Schema.define(version: 2019_02_27_200206) do
     t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+  end
+
+  create_table "votes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "votable_type"
+    t.integer "votable_id"
+    t.string "voter_type"
+    t.integer "voter_id"
+    t.boolean "vote_flag"
+    t.string "vote_scope"
+    t.integer "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
 
 end

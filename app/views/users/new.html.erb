@@ -1,0 +1,89 @@
+<h1>Registration new user</h1>
+<%= render 'shared/errors', obj: @user %>
+<div class="row">
+ <div class="col-12">
+<%= form_for(@user,:html => {class: "form-horizontal", role: "form"}) do |f| %>
+<div class="form-group">
+ <div class="control-label col-sm-2">
+    <%= f.label :username %><br>
+    </div>
+    <div class="col-6">
+    <%= f.text_field :username, class: "form-control", placeholder: "Your username", autofocus: true %>
+   </div>
+  </div>
+  <div class="form-group">
+   <div class="control-label col-2">
+      <%= f.label :email %><br>
+      </div>
+      <div class="col-6">
+      <%= f.text_field :email, class: "form-control", placeholder: "example@mail.com", autofocus: true %>
+     </div>
+    </div>
+    <div class="form-group">
+     <div class="control-label col-2">
+        <%= f.label :first_name %><br>
+        </div>
+        <div class="col-6">
+        <%= f.text_field :first_name, class: "form-control", placeholder: "Your first name", autofocus: true %>
+       </div>
+      </div>
+      <div class="form-group">
+       <div class="control-label col-2">
+          <%= f.label :second_name %><br>
+          </div>
+          <div class="col-6">
+          <%= f.text_field :second_name, class: "form-control", placeholder: "Your second name", autofocus: true %>
+         </div>
+        </div>
+        <div class="form-group">
+        <div class="control-label col-2">
+           <%= f.label :password %><br>
+           </div>
+           <div class="col-6">
+           <%= f.password_field :password, class: "form-control", placeholder: "Your first name", autofocus: true %>
+          </div>
+         </div>
+
+        <div class="form-group">
+         <div class="control-label col-2">
+            <%= f.label :city %><br>
+            </div>
+            <div class="col-6">
+            <%= f.text_field :city, class: "form-control", placeholder: "Your city", autofocus: true %>
+           </div>
+          </div>
+          <div class="form-group">
+           <div class="control-label col-2">
+              <%= f.label :passport_number %><br>
+              </div>
+              <div class="col-6">
+              <%= f.text_field :passport_number, class: "form-control", placeholder: "Your passport", autofocus: true %>
+             </div>
+            </div>
+            <div class="form-group">
+             <div class="control-label col-2">
+                <%= f.label :phone_number %><br>
+                </div>
+                <div class="col-6">
+                <%= f.text_field :phone_number, class: "form-control", placeholder: "Your phone number", autofocus: true %>
+               </div>
+              </div>
+              <div class="form-group">
+               <div class="control-label col-2">
+                  <%= f.label :date_of_birth %><br>
+                  </div>
+                  <div class="col-6">
+                  <%= f.date_field :date_of_birth, class: "form-control", placeholder: "Your date od birth", autofocus: true %>
+                 </div>
+                </div>
+
+   <div class="form-group">
+    <div class="offset-2 col-10">
+     <%= f.submit class: 'btn btn-primary btn-large' %>
+    </div>
+   </div>
+<% end %>
+
+<%= link_to 'Back', petitions_path %>
+ </div>
+</div>

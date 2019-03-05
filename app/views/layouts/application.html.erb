@@ -4,24 +4,19 @@
     <title>PetitionOnline</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= render 'layouts/navigation' %>
-
-    <div class="container">
-      <ol class="breadcrumb">
-        <li><%= current_uri = request.env['PATH_INFO'] %></li>
-      </ol>
-      <%= render 'shared/messages' %>
-          <%= yield %>
+    <div class="wrap">
+      <%= render 'layouts/navigation' %>
+      <div class="container">
+        <%= render 'shared/messages' %>
+            <%= yield %>
+      </div>
     </div>
 
-    <%= debug(params) if Rails.env.development? %>
-
-
+    <%= render 'layouts/footer' %>
   </body>
 </html>

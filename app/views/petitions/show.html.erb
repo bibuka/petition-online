@@ -1,24 +1,66 @@
 <% if flash[:notice] %>
     <div class="alert alert-success"><%= flash[:notice] %></div>
 <% end %>
-<h2 align="center">Title: <%= @petition.title %></h2>
-<div class="well">
-<ul class="nav nav-tabs role="tablist"">
-  <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Text of petition</a></li>
-  <li role="presentation"><a href="#subscribers" aria-controls="subscribers" role="tab" data-toggle="tab">Subscribers</a></li>
-  <li role="presentation"><a href="#answer" aria-controls="answer" role="tab" data-toggle="tab">Answer</a></li>
-</ul>
-<div class="tab-content">
-   <div role="tabpanel" class="tab-pane active" id="description">
-     <br>
-     <p>
-       <%= @petition.description %>
-     </p>
-   </div>
-   <div role="tabpanel" class="tab-pane" id="subscribers">...</div>
-   <div role="tabpanel" class="tab-pane" id="answer">...</div>
- </div>
- <hr>
- <%= link_to "Show all petitions", petitions_path, class: "btn btn-xs btn-success"  %>
- <%= link_to "Delete", petition_path(@petition), method: :delete, data: { confirm: "Are you sure you want to delete this petition?"}, class: "btn btn-xs btn-danger" %>
+<h2><%= @petition.title %></h2>
+
+<hr>
+<div class="petition__info">
+  <div class="row h-100">
+    <div class="col-2 d-flex justify-content-between flex-column h-100">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-description" role="tab" aria-controls="description" aria-selected="true">Text of petition</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-subscribers" role="tab" aria-controls="v-pills-profile" aria-selected="false">Subscribers</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-answer" role="tab" aria-controls="v-pills-messages" aria-selected="false">Answer</a>
+      </div>
+      <div class="petition-actions">
+        <% if logged_in? %>
+        <% if current_user.voted_up_on? @petition %>
+          <%= link_to unsupport_petition_path(@petition),:class=>"btn btn-warning", method: :put do %>
+            Unsupport
+          <% end %>
+        <% else %>
+          <%= link_to support_petition_path(@petition),:class=>"btn btn-success", method: :put do %>
+            Support
+          <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-description" role="tabpanel" aria-labelledby="v-pills-home-tab"><%= @petition.description %></div>
+        <div class="tab-pane fade" id="v-pills-subscribers" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <p>User supported this petition: <%= @petition.get_upvotes.size %> from 90</p>
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @petition.votes_for.up.by_type(User).voters.each do |user| %>
+              <tr>
+                <th scope="row"><%= user.id %></th>
+                <td><%= user.first_name %></td>
+                <td><%= user.second_name %></td>
+              </tr>
+              <% end%>
+              </tbody>
+          </table>
+        </div>
+        <div class="tab-pane fade" id="v-pills-answer" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+      </div>
+    </div>
+  </div>
 </div>
+<hr>
+<%= link_to "Show all petitions", petitions_path, class: "btn btn-xs btn-success"  %>
+<% if logged_in? %>
+  <% if @petition.user_id == current_user.id %>
+    <%= link_to "Delete", petition_path(@petition), method: :delete, data: { confirm: "Are you sure you want to delete this petition?"}, class: "btn btn-xs btn-danger" %>
+  <% end %>
+<% end %>
+<small>Created by: <%= @petition.user.first_name if @petition.user %> <%= @petition.user.second_name if @petition.user %>,
+<%= (@petition.updated_at).strftime("Published: %d:%m:%Y at %H:%M") %>
