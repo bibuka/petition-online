@@ -1,6 +1,10 @@
 <% if flash[:notice] %>
     <div class="alert alert-success"><%= flash[:notice] %></div>
 <% end %>
+<p class="petition-status">Status: <%= @petition.state %></p>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: <%= @petition.get_upvotes.size.to_f %>%;" aria-valuenow="<%= @petition.get_upvotes.size%>" aria-valuemin="0" aria-valuemax="100"><%= @petition.get_upvotes.size%>/100</div>
+</div>
 <h2><%= @petition.title %></h2>
 
 <hr>
@@ -10,19 +14,25 @@
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-description" role="tab" aria-controls="description" aria-selected="true">Text of petition</a>
         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-subscribers" role="tab" aria-controls="v-pills-profile" aria-selected="false">Subscribers</a>
-        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-answer" role="tab" aria-controls="v-pills-messages" aria-selected="false">Answer</a>
+        <%  if @petition.state == "complited"  %>
+          <a class="nav-link " id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-answer" role="tab" aria-controls="v-pills-messages" aria-selected="false">Answer</a>
+        <% else %>
+          <a class="nav-link disabled" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-answer" role="tab" aria-controls="v-pills-messages" aria-selected="false">Answer</a>
+        <% end %>
       </div>
       <div class="petition-actions">
-        <% if logged_in? %>
-        <% if current_user.voted_up_on? @petition %>
-          <%= link_to unsupport_petition_path(@petition),:class=>"btn btn-warning", method: :put do %>
-            Unsupport
+        <% if @petition.state == "vouting" %>
+          <% if logged_in? %>
+            <% if current_user.voted_up_on? @petition %>
+              <%= link_to unsupport_petition_path(@petition),:class=>"btn btn-warning", method: :put do %>
+                Unsupport
+              <% end %>
+            <% else %>
+              <%= link_to support_petition_path(@petition),:class=>"btn btn-success", method: :put do %>
+                Support
+              <% end %>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= link_to support_petition_path(@petition),:class=>"btn btn-success", method: :put do %>
-            Support
-          <% end %>
-        <% end %>
         <% end %>
       </div>
     </div>
@@ -30,7 +40,7 @@
       <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-description" role="tabpanel" aria-labelledby="v-pills-home-tab"><%= @petition.description %></div>
         <div class="tab-pane fade" id="v-pills-subscribers" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-          <p>User supported this petition: <%= @petition.get_upvotes.size %> from 90</p>
+          <p>User supported this petition: <%= @petition.get_upvotes.size %> from 1500</p>
           <table class="table">
             <thead class="thead-light">
               <tr>

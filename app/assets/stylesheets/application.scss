@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "petitions";
 
 html{
   min-height: 100% !important;
@@ -14,30 +15,25 @@ body{
   min-height: 100%;
 
 }
+.transparent{
+  background-color: transparent;
+  &-footer{
+    background-color: rgba(0,0,0,.3);
+  }
+  a{
+    color:#fff !important;
+  }
+}
+.main{
+  background: linear-gradient(#202d5f, #614381);
+  color: #fff;
+}
 .pagination{
   margin-top: 26px;
 }
-.petition{
-  &__info{
-    height: 500px;
-  }
-  &__card{
-  border-radius: 3px;
-  padding: 25px 25px;
-  margin-top: 25px;
-  transition: all ease .5s;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    &:hover{
-      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) ;
-    }
-    &__title{
-      font-size: 22px;
-    }
-    &__description{
-      height: 120px;
-      overflow: hidden;
-    }
-  }
+
+.welcome{
+  margin-top: 20%;
 }
 footer{
   a{

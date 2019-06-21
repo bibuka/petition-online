@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div class="wrap">
+    <div class="wrap <% if current_page?('/')%> main <% end %>">
       <%= render 'layouts/navigation' %>
       <div class="container">
         <%= render 'shared/messages' %>

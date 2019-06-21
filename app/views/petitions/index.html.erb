@@ -9,17 +9,20 @@
 <div class="row">
   <% @petitions.each do |petition| %>
 <div class="col-md-12">
-  <div class="petition__card ">
-    <div class="petition__card__id">
-      Petition number: #<%= petition.id%>
+  <div class="petition-card petition-card-<%= petition.state%>">
+    <div class="petition-card__header d-flex justify-content-between">
+      <div class="petition-card__header__id">
+        Petition number: #<%= petition.id%>
+      </div>
+      <p class="petition-card__header__status">Status: <%= petition.state %></p>
     </div>
-    <div class="petition__card__title">
+    <div class="petition-card__title">
       <%= petition.title %>
     </div>
-    <div class="petition__card__description">
+    <div class="petition-card__description">
       <%= petition.description %>
     </div>
-    <div class="petition__card__actions mt-2">
+    <div class="petition-card__actions mt-2">
       <%= link_to 'View more..', petition_path(petition), :class=>"btn btn-outline-info" %>
     </div>
 

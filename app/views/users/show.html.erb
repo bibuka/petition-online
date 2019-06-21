@@ -1,0 +1,58 @@
+<h1>User:  <%= current_user.username %></h1>
+
+<div class="row">
+  <div class="col-md-3">
+    First name:
+  </div>
+  <div class="col-md-9">
+    <%= current_user.first_name %>
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-3">
+    Second name:
+  </div>
+  <div class="col-md-9">
+    <%= current_user.second_name %>
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-3">
+    Email:
+  </div>
+  <div class="col-md-9">
+    <%= current_user.email %>
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-3">
+    Your date of birth:
+  </div>
+  <div class="col-md-9">
+    <%= current_user.date_of_birth %>
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-3">
+    Passport number:
+  </div>
+  <div class="col-md-9">
+    <%= current_user.passport_number %>
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-3">
+    City where are you live:
+  </div>
+  <div class="col-md-9">
+    <%= current_user.city %>
+  </div>
+
+</div>
+<hr>
+<%=  (current_user.created_at).strftime("Registered: %d %B %Y at %H:%M")%>
